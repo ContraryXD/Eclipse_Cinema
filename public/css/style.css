@@ -53,14 +53,18 @@ body {
 }
 
 .navbar {
-  transition: background-color 0.5s ease;
+  transition:
+    background-color 0.5s ease,
+    border 0.5s ease;
   background-color: rgba(68, 54, 39, 0.3);
+  border: 2px solid transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
   /* Translucent */
 }
 
 .navbar.scrolled {
-  background-color: rgba(41, 32, 23, 0.9) !important;
-  /* Solid */
+  background-color: rgba(41, 32, 23) !important;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -142,4 +146,14 @@ p,
 
 .form-control:focus {
   color: #000000;
+}
+
+.footer {
+  background-color: #443627;
+  color: white;
+  padding: 20px 0;
+}
+
+.footer a {
+  color: #d98324;
 }
