@@ -50,7 +50,7 @@ CREATE TABLE Users (
     UserID INT PRIMARY KEY,
     UserName VARCHAR(255),
     Email VARCHAR(255),
-    PasswordHash VARCHAR(255)
+    Password VARCHAR(255)
 );
 
 -- Insert sample movies
@@ -187,6 +187,126 @@ VALUES
         '1pHDWnXmK7Y',
         'Anthony Mackie, Sebastian Stan, Emily VanCamp',
         'Phần tiếp theo của loạt phim "Captain America", kể về hành trình mới của Sam Wilson với vai trò Captain America.'
+    ),
+    (
+        11,
+        'Guardians of the Galaxy Vol. 3',
+        'Action',
+        '2024-05-05',
+        149,
+        8.3,
+        'movie_11.jpg',
+        'dMpgF8IoFqY',
+        'Chris Pratt, Zoe Saldana, Dave Bautista',
+        'Phần ba của loạt phim siêu anh hùng "Guardians of the Galaxy".'
+    ),
+    (
+        12,
+        'The Batman: Arkham',
+        'Action',
+        '2024-10-31',
+        160,
+        8.7,
+        'movie_12.jpg',
+        'QhEV6txeWXk',
+        'Robert Pattinson, Zoë Kravitz, Colin Farrell',
+        'Một phần mới trong loạt phim "The Batman", tập trung vào cuộc đối đầu với thế lực tội phạm trong Arkham.'
+    ),
+    (
+        13,
+        'Fantastic Beasts: The Blue Flame',
+        'Fantasy',
+        '2025-07-15',
+        142,
+        7.9,
+        'movie_13.jpg',
+        'xR9DjxXntRc',
+        'Eddie Redmayne, Katherine Waterston, Jude Law',
+        'Phần tiếp theo của loạt phim "Fantastic Beasts", với cuộc phiêu lưu mới.'
+    ),
+    (
+        14,
+        'Mission: Impossible – Dead Reckoning Part Two',
+        'Action',
+        '2025-08-22',
+        145,
+        8.5,
+        'movie_14.jpg',
+        'm_NgfNn5wNk',
+        'Tom Cruise, Rebecca Ferguson, Simon Pegg',
+        'Phần hai của bộ phim hành động "Mission: Impossible – Dead Reckoning".'
+    ),
+    (
+        15,
+        'The Meg 2: The Trench',
+        'Sci-Fi',
+        '2024-08-09',
+        116,
+        7.1,
+        'movie_15.jpg',
+        '3uBZB00XYwk',
+        'Jason Statham, Li Bingbing, Ruby Rose',
+        'Phần hai của bộ phim khoa học viễn tưởng "The Meg".'
+    ),
+    (
+        16,
+        'Avatar: The Way of Water',
+        'Fantasy',
+        '2024-12-17',
+        190,
+        8.9,
+        'movie_16.jpg',
+        'FajM0D9rthY',
+        'Sam Worthington, Zoe Saldana, Sigourney Weaver',
+        'Phần tiếp theo của bộ phim "Avatar", tiếp tục câu chuyện về Pandora.'
+    ),
+    (
+        17,
+        'Joker: Folie à Deux',
+        'Drama',
+        '2025-10-04',
+        130,
+        8.8,
+        'movie_17.jpg',
+        'D61ifKo42k0',
+        'Joaquin Phoenix, Lady Gaga, Zazie Beetz',
+        'Phần tiếp theo của bộ phim "Joker", khám phá thêm về sự điên rồ của nhân vật chính.'
+    ),
+    (
+        18,
+        'Spider-Man: Beyond the Spider-Verse',
+        'Animation',
+        '2024-04-08',
+        120,
+        8.9,
+        'movie_18.jpg',
+        'PqmiEy0vCdo',
+        'Shameik Moore, Hailee Steinfeld, Mahershala Ali',
+        'Phần tiếp theo của bộ phim hoạt hình "Spider-Man: Into the Spider-Verse".'
+    ),
+    (
+        19,
+        'Black Panther: Wakanda Forever',
+        'Action',
+        '2024-11-10',
+        150,
+        8.6,
+        'movie_19.jpg',
+        'vtoShbSlJ4g',
+        'Letitia Wright, Winston Duke, Angela Bassett',
+        'Phần tiếp theo của bộ phim siêu anh hùng "Black Panther".'
+    ),
+    (
+        20,
+        'John Wick: Chapter 5',
+        'Action',
+        '2025-03-21',
+        135,
+        8.7,
+        'movie_20.jpg',
+        'KjUcfHkHdYg',
+        'Keanu Reeves, Laurence Fishburne, Ian McShane',
+        'Phần tiếp theo của loạt phim hành động "John Wick".'
     );
 
 -- Insert sample theaters
@@ -247,7 +367,7 @@ VALUES
 
 -- Insert sample users
 INSERT INTO
-    Users (UserID, UserName, Email, PasswordHash)
+    Users (UserID, UserName, Email, Password)
 VALUES
     (
         1,

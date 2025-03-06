@@ -184,7 +184,7 @@
 
 <body>
     <!-- Thanh điều hướng -->
-    <?php include './template/nav.php'; ?>
+    <?php include './template/nav.html'; ?>
     <!-- hero -->
     <div class="hero">
         <div class="text-center">
@@ -198,65 +198,41 @@
         <h2 class="text-center mb-4">Đang chiếu</h2>
         <div class="row">
             <?php
-            // Kết nối cơ sở dữ liệu
-            $conn = new mysqli('localhost', 'root', '', 'MovieDB');
+            try {
+                // Include the database connection file
+                include 'connection.php';
 
-            // Kiểm tra kết nối
-            if ($conn->connect_error) {
-                die("Kết nối thất bại: " . $conn->connect_error);
-            }
+                // Lấy 3 phim ngẫu nhiên
+                $sql = "SELECT * FROM Movies ORDER BY RAND() LIMIT 3";
+                $result = $conn->query($sql);
 
-            // Lấy 3 phim ngẫu nhiên
-            $sql = "SELECT * FROM Movies ORDER BY RAND() LIMIT 3";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Xuất dữ liệu của từng hàng
-                while ($row = $result->fetch_assoc()) {
-                    echo '<div class="col-md-4 mb-4">';
-                    echo '    <div class="card">';
-                    echo '        <img class="card-img-top" src="public/assets/movies/' . $row["Image"] . '" class="card-img-top" alt="' . $row["Title"] . '">';
-                    echo '        <div class="card-body">';
-                    echo '            <h5 class="card-title">' . $row["Title"] . '</h5>';
-                    echo '            <p class="card-text">' . $row["Genre"] . '</p>';
-                    echo '            <a href="details.php?movie_id=' . $row["MovieID"] . '" class="btn btn-primary">Xem chi tiết</a>';
-                    echo '        </div>';
-                    echo '    </div>';
-                    echo '</div>';
+                if ($result->num_rows > 0) {
+                    // Xuất dữ liệu của từng hàng
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<div class="col-md-4 mb-4">';
+                        echo '    <div class="card">';
+                        echo '        <img class="card-img-top" src="public/assets/movies/' . $row["Image"] . '" class="card-img-top" alt="' . $row["Title"] . '">';
+                        echo '        <div class="card-body">';
+                        echo '            <h5 class="card-title">' . $row["Title"] . '</h5>';
+                        echo '            <p class="card-text">' . $row["Genre"] . '</p>';
+                        echo '            <a href="details.php?movie_id=' . $row["MovieID"] . '" class="btn btn-primary">Xem chi tiết</a>';
+                        echo '        </div>';
+                        echo '    </div>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo "Không có kết quả";
                 }
-            } else {
-                echo "Không có kết quả";
-            }
 
-            $conn->close();
+                $conn->close();
+            } catch (Exception $e) {
+                echo '<div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div>';
+            }
             ?>
         </div>
     </div>
-    <!-- chân trang -->
-    <footer class="footer mt-5">
-        <div class="container text-center">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Về chúng tôi</h5>
-                    <p>Eclipse Cinema là hệ thống đặt vé cho những bộ phim mới nhất và trải nghiệm điện ảnh tuyệt vời.</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Liên hệ</h5>
-                    <p>Email: huynhhuuloc81206@gmail.com</p>
-                    <p>Điện thoại: 0901 020 761</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Theo dõi chúng tôi</h5>
-                    <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="mt-3">
-                <p>&copy; 2025 Eclipse Cinema</p>
-            </div>
-        </div>
-    </footer>
+    <!-- footer -->
+    <?php include './template/footer.html'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="public/js/main.js"></script>

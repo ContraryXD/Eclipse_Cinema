@@ -39,36 +39,28 @@
 
         .movie-details {
             color: #333333;
-            /* Set the text color to a darker shade of gray */
         }
 
         .movie-details h2 {
             color: #000000;
-            /* Set the title color to black */
         }
 
         .movie-details p {
             color: #555555;
-            /* Set the paragraph text color to a lighter shade of gray */
         }
     </style>
 </head>
 
 <body>
-    <?php include 'template/nav.php'; ?>
+    <?php include 'template/nav.html'; ?>
     <?php
-    // Kết nối cơ sở dữ liệu
-    $conn = new mysqli('localhost', 'root', '', 'MovieDB');
+    // kết nối
+    include 'connection.php';
 
-    // Kiểm tra kết nối
-    if ($conn->connect_error) {
-        die("Kết nối thất bại: " . $conn->connect_error);
-    }
-
-    // Lấy movie_id từ tham số truy vấn
+    // Lấy movie_id từ url
     $movie_id = isset($_GET['movie_id']) ? intval($_GET['movie_id']) : 0;
 
-    // Lấy chi tiết phim
+    // select chi tiết phim
     $sql = "SELECT * FROM Movies WHERE MovieID = $movie_id";
     $result = $conn->query($sql);
     ?>
@@ -103,7 +95,7 @@
         $conn->close();
         ?>
     </div>
-
+    <?php include 'template/footer.html'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="public/js/main.js"></script>
 </body>
