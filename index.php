@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -184,7 +187,7 @@
 
 <body>
     <!-- Thanh điều hướng -->
-    <?php include './template/nav.html'; ?>
+    <?php include './template/nav.php'; ?>
     <!-- hero -->
     <div class="hero">
         <div class="text-center">

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -52,7 +55,7 @@
 </head>
 
 <body>
-    <?php include 'template/nav.html'; ?>
+    <?php include 'template/nav.php'; ?>
     <?php
     // kết nối
     include 'connection.php';

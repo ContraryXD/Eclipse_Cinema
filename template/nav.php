@@ -20,13 +20,21 @@
           <a class="nav-link" href="#">About</a>
         </li>
       </ul>
-      <form class="d-flex ms-3">
-        <input class="form-control me-2 border-0" type="search" placeholder="Search" aria-label="Search" />
+      <form class="d-flex ms-3" method="GET" action="search.php">
+        <input class="form-control me-2 border-0" type="search" name="query" placeholder="Search" aria-label="Search" required />
         <button class="btn btn-circle btn-lg" type="submit"><i class="fas fa-search"></i></button>
       </form>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="login.php"><i class="fas fa-user"></i> Login</a>
+          <a class="nav-link" href="login.php"><i class="fas fa-user"></i>
+            <?php
+            if (isset($_SESSION['user'])) {
+              echo $_SESSION['user'];
+            } else {
+              echo 'Login';
+            }
+            ?>
+          </a>
         </li>
       </ul>
     </div>

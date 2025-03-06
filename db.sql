@@ -373,17 +373,17 @@ VALUES
         1,
         'JohnDoe',
         'john@example.com',
-        'hashedpassword1'
+        '123'
     ),
     (
         2,
         'JaneSmith',
         'jane@example.com',
-        'hashedpassword2'
+        '123'
     ),
     (
         3,
         'EmilyJones',
         'emily@example.com',
-        'hashedpassword3'
+        '123'
     );

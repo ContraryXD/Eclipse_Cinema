@@ -1,9 +1,12 @@
 <?php
 session_start();
+include 'connection.php';
 
-if (isset($_SESSION['user'])) {
-    header('Location: account.php');
-    exit();
+$query = isset($_GET['query']) ? trim($_GET['query']) : '';
+
+if ($query) {
+    $search_query = "SELECT * FROM Movies WHERE Title LIKE '%$query%' OR Genre LIKE '%$query%' OR Description LIKE '%$query%'";
+    $search_result = mysqli_query($conn, $search_query);
 }
 ?>
 <!DOCTYPE html>
@@ -12,7 +15,7 @@ if (isset($_SESSION['user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
+    <title>Search Results</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="./public/css/style.css" rel="stylesheet">
@@ -87,51 +90,36 @@ if (isset($_SESSION['user'])) {
         <div class="overlay"></div>
         <div class="content text-center">
             <h1>Eclipse Cinema</h1>
-            <p class="lead">Đăng nhập</p>
+            <h2 class="text-center mb-4">Kết quả tìm kiếm: "<?php echo htmlspecialchars($query); ?>"</h2>
         </div>
     </div>
-    <div class="login-container mt-5">
-        <h2 class="text-center">Đăng nhập</h2>
-        <?php
-        include 'connection.php';
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = trim($_POST['username']);
-            $password = trim($_POST['password']);
-
-            $sql = "SELECT * FROM Users WHERE UserName = '$username' AND Password = '$password'";
-
-            $result = mysqli_query($conn, $sql);
-
-            if ($result && mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_assoc($result);
-                $_SESSION['user'] = $row['UserName'];
-                $_SESSION['id'] = $row['UserID'];
-
-                header('Location: account.php');
-                exit();
+    <div class="container mt-5">
+        <div class="row">
+            <?php
+            if ($query && $search_result && mysqli_num_rows($search_result) > 0) {
+                while ($row = mysqli_fetch_assoc($search_result)) {
+                    echo '<div class="col-md-4 mb-4">';
+                    echo '    <div class="card">';
+                    echo '        <img class="card-img-top" src="public/assets/movies/' . $row["Image"] . '" class="card-img-top" alt="' . $row["Title"] . '">';
+                    echo '        <div class="card-body">';
+                    echo '            <h5 class="card-title">' . $row["Title"] . '</h5>';
+                    echo '            <p class="card-text">' . $row["Genre"] . '</p>';
+                    echo '            <a href="details.php?movie_id=' . $row["MovieID"] . '" class="btn btn-primary">Xem chi tiết</a>';
+                    echo '        </div>';
+                    echo '    </div>';
+                    echo '</div>';
+                }
             } else {
-                echo '<div class="alert alert-danger" role="alert">Tên đăng nhập hoặc mật khẩu không đúng!</div>';
+                echo '<div class="col-12">';
+                echo '    <div class="alert alert-warning" role="alert">No results found for "' . htmlspecialchars($query) . '"</div>';
+                echo '</div>';
             }
-            mysqli_close($conn);
-        }
-        ?>
-        <form class="login" method="post" action="login.php">
-            <div class="mb-3">
-                <label for="username" class="form-label">Tên đăng nhập</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Mật khẩu</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-        </form>
-
-
+            ?>
+        </div>
     </div>
     <?php include 'template/footer.html'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/main.js"></script>
 </body>
 
 </html>
