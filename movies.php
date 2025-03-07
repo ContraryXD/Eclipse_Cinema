@@ -13,67 +13,74 @@ $genre = isset($_GET['genre']) ? htmlspecialchars($_GET['genre']) : '';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="./public/css/style.css" rel="stylesheet">
+
     <style>
-    .hero {
-        position: relative;
-        background: url("./public/assets/poster_2.jpg") no-repeat center center;
-        background-size: cover;
-        height: 50vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #d98324;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    }
+        .hero {
+            position: relative;
+            background: url("./public/assets/poster_2.jpg") no-repeat center center;
+            background-size: cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d98324;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
 
-    body {
-        background-color: #f2f6d0;
-        position: relative;
-    }
+        body {
+            background-color: #f2f6d0;
+            position: relative;
+        }
 
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 1;
-    }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
 
-    .star-rating {
-        position: relative;
-        display: inline-block;
-        color: #FFD700;
-    }
+        .card {
+            height: 100%;
+        }
 
-    .star-rating .cover {
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        background-color: white;
-        z-index: 1;
-    }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-    .card {
-        height: 100%;
-    }
+        .card-img-top {
+            height: 500px;
+            object-fit: cover;
+        }
 
-    .card-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+        .star-rating {
+            position: relative;
+            display: inline-block;
+            color: #ffd700;
+            width: 90px;
+        }
 
-    .card-img-top {
-        height: 500px;
-        object-fit: cover;
-    }
+        .star-rating .stars {
+            position: relative;
+            z-index: 1;
+        }
 
-    .btn {
-        width: 100;
-    }
+        .star-rating .cover {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            background-color: white;
+            z-index: 2;
+        }
+
+        .btn {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -109,17 +116,25 @@ $genre = isset($_GET['genre']) ? htmlspecialchars($_GET['genre']) : '';
                     echo '        <img src="public/assets/movies/' . $row["Image"] . '" class="card-img-top" alt="' . $row["Title"] . '">';
                     echo '        <div class="card-body">';
                     echo '            <h5 class="card-title">' . $row["Title"] . '</h5>';
-                    echo '            <p class="card-text">' . $row["Genre"] . '</p>';
-                    echo '            <p class="card-text">' . number_format($row["Price"], 0, ',', '.') . ' VND</p>';
+                    echo '            <p class="card-text text-dark">' . $row["Genre"] . '</p>';
+                    echo '            <p class="card-text text-dark">' . number_format($row["Price"], 0, ',', '.') . ' VND</p>';
                     echo '            <div class="star-rating">';
+                    echo '                <div class="stars">';
                     for ($i = 0; $i < 5; $i++) {
                         echo '<i class="fas fa-star"></i>';
                     }
+                    echo '                </div>';
                     $cover_width = (10 - $row["Rating"]) * 10;
                     echo '                <div class="cover" style="width: ' . $cover_width . '%;"></div>';
                     echo '            </div>';
-                    echo '            <a href="details.php?movie_id=' . $row["MovieID"] . '" class="btn btn-primary mt-2 w-50">View Details</a>';
-                    echo '            <a href="booking.php?movie_id=' . $row["MovieID"] . '" class="btn btn-success mt-2">Book Now</a>';
+                    echo '            <div class="row mt-2">';
+                    echo '                <div class="col-6">';
+                    echo '                    <a href="details.php?movie_id=' . $row["MovieID"] . '" class="btn btn-primary">View Details</a>';
+                    echo '                </div>';
+                    echo '                <div class="col-6">';
+                    echo '                    <a href="booking.php?movie_id=' . $row["MovieID"] . '" class="btn btn-success">Book Now</a>';
+                    echo '                </div>';
+                    echo '            </div>';
                     echo '        </div>';
                     echo '    </div>';
                     echo '</div>';

@@ -16,24 +16,24 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="movies.php">All Movies</a></li>
                         <?php
-            // Include the database connection file
-            include 'connection.php';
+                        // Include the database connection file
+                        include 'connection.php';
 
-            // Fetch distinct genres from the Movies table
-            $sql = "SELECT DISTINCT Genre FROM Movies";
-            $result = $conn->query($sql);
+                        // Fetch distinct genres from the Movies table
+                        $sql = "SELECT DISTINCT Genre FROM Movies";
+                        $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-              // Output data of each row
-              while ($row = $result->fetch_assoc()) {
-                echo '<li><a class="dropdown-item" href="movies.php?genre=' . urlencode($row["Genre"]) . '">' . $row["Genre"] . '</a></li>';
-              }
-            } else {
-              echo '<li><a class="dropdown-item" href="#">No genres available</a></li>';
-            }
+                        if ($result->num_rows > 0) {
+                            // các thể loại phim
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<li><a class="dropdown-item" href="movies.php?genre=' . urlencode($row["Genre"]) . '">' . $row["Genre"] . '</a></li>';
+                            }
+                        } else {
+                            echo '<li><a class="dropdown-item" href="#">No genres available</a></li>';
+                        }
 
-            $conn->close();
-            ?>
+                        $conn->close();
+                        ?>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -49,12 +49,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="login.php"><i class="fas fa-user"></i>
                         <?php
-            if (isset($_SESSION['user'])) {
-              echo $_SESSION['user'];
-            } else {
-              echo 'Login';
-            }
-            ?>
+                        if (isset($_SESSION['user'])) {
+                            echo $_SESSION['user'];
+                        } else {
+                            echo 'Login';
+                        }
+                        ?>
                     </a>
                 </li>
             </ul>

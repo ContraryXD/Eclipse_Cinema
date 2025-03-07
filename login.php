@@ -1,9 +1,35 @@
 <?php
 session_start();
+ob_start();
 
 if (isset($_SESSION['user'])) {
     header('Location: account.php');
     exit();
+}
+
+include 'connection.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    $sql = "SELECT * FROM Users WHERE UserName = '$username' AND Password = '$password'";
+
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['user'] = $row['UserName'];
+        $_SESSION['id'] = $row['UserID'];
+        echo "<script type='text/javascript'>
+                alert('Đăng nhập thành công!');
+                window.location.href = 'account.php';
+              </script>";
+        exit();
+    } else {
+        $error_message = 'Tên đăng nhập hoặc mật khẩu không đúng!';
+    }
+    mysqli_close($conn);
 }
 ?>
 <!DOCTYPE html>
@@ -87,35 +113,14 @@ if (isset($_SESSION['user'])) {
         <div class="overlay"></div>
         <div class="content text-center">
             <h1>Eclipse Cinema</h1>
-            <p class="lead">Đăng nhập</p>
+            <p class="lead fs-2">Đăng nhập</p>
         </div>
     </div>
     <div class="login-container mt-5">
         <h2 class="text-center">Đăng nhập</h2>
-        <?php
-        include 'connection.php';
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = trim($_POST['username']);
-            $password = trim($_POST['password']);
-
-            $sql = "SELECT * FROM Users WHERE UserName = '$username' AND Password = '$password'";
-
-            $result = mysqli_query($conn, $sql);
-
-            if ($result && mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_assoc($result);
-                $_SESSION['user'] = $row['UserName'];
-                $_SESSION['id'] = $row['UserID'];
-
-                header('Location: account.php');
-                exit();
-            } else {
-                echo '<div class="alert alert-danger" role="alert">Tên đăng nhập hoặc mật khẩu không đúng!</div>';
-            }
-            mysqli_close($conn);
-        }
-        ?>
+        <?php if (isset($error_message)) { ?>
+            <div class="alert alert-danger" role="alert"><?php echo $error_message; ?></div>
+        <?php } ?>
         <form class="login" method="post" action="login.php">
             <div class="mb-3">
                 <label for="username" class="form-label">Tên đăng nhập</label>
@@ -127,11 +132,10 @@ if (isset($_SESSION['user'])) {
             </div>
             <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
         </form>
-
-
     </div>
     <?php include 'template/footer.html'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+<?php ob_end_flush(); ?>

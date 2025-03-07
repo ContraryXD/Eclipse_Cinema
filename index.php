@@ -12,176 +12,176 @@ session_start();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- <link href="./public/css/style.css" rel="stylesheet"> -->
     <style>
-    .hero {
-        position: relative;
-        background: url("./public/assets/poster_2.jpg") no-repeat center center;
-        background-size: cover;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #d98324;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    }
-
-    body {
-        background-color: #f2f6d0;
-        position: relative;
-    }
-
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 1;
-    }
-
-    .content {
-        position: relative;
-        z-index: 2;
-    }
-
-    .card-img-top {
-        height: 800px;
-        object-fit: cover;
-    }
-
-    .hero::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        /* Dark overlay */
-    }
-
-    .hero .text-center {
-        position: relative;
-        z-index: 1;
-        /* Ensures text stays above overlay */
-    }
-
-    @keyframes fadeInDown {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
+        .hero {
+            position: relative;
+            background: url("./public/assets/poster_2.jpg") no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d98324;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
-        to {
+        body {
+            background-color: #f2f6d0;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-img-top {
+            height: 800px;
+            object-fit: cover;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            /* Dark overlay */
+        }
+
+        .hero .text-center {
+            position: relative;
+            z-index: 1;
+            /* Ensures text stays above overlay */
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar {
+            transition: background-color 0.5s ease, border 0.5s ease;
+            background-color: rgba(68, 54, 39, 0.3);
+            border: 2px solid transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+            /* Translucent */
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(41, 32, 23) !important;
+            /* Solid with white outline */
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: #d98324;
+        }
+
+        .navbar-light .navbar-brand {
+            color: #d98324;
+        }
+
+        .btn-outline-success {
+            color: #d98324;
+            border-color: #d98324;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #d98324;
+            border-color: #d98324;
+        }
+
+        .btn-primary {
+            background-color: #d98324;
+            border-color: #d98324;
+        }
+
+        .btn-primary:hover {
+            background-color: #443627;
+            border-color: #443627;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #d98324;
+        }
+
+        p,
+        .card-text {
+            color: #ffffff;
+        }
+
+        .btn-circle.btn-lg {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            font-size: 18px;
+            line-height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: none;
+            color: #ffffff;
+        }
+
+        .btn-circle.btn-lg:hover i {
+            color: #d98324;
+        }
+
+        .form-control {
+            height: 40px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .form-control::placeholder {
+            color: #ffffff;
             opacity: 1;
-            transform: translateY(0);
         }
-    }
 
-    .navbar {
-        transition: background-color 0.5s ease, border 0.5s ease;
-        background-color: rgba(68, 54, 39, 0.3);
-        border: 2px solid transparent;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        .form-control:focus {
+            color: #000000;
+        }
 
-        /* Translucent */
-    }
+        .footer {
+            background-color: #443627;
+            color: white;
+            padding: 20px 0;
+        }
 
-    .navbar.scrolled {
-        background-color: rgba(41, 32, 23) !important;
-        /* Solid with white outline */
-    }
-
-    .navbar-light .navbar-nav .nav-link {
-        color: #ffffff;
-    }
-
-    .navbar-light .navbar-nav .nav-link:hover {
-        color: #d98324;
-    }
-
-    .navbar-light .navbar-brand {
-        color: #d98324;
-    }
-
-    .btn-outline-success {
-        color: #d98324;
-        border-color: #d98324;
-    }
-
-    .btn-outline-success:hover {
-        background-color: #d98324;
-        border-color: #d98324;
-    }
-
-    .btn-primary {
-        background-color: #d98324;
-        border-color: #d98324;
-    }
-
-    .btn-primary:hover {
-        background-color: #443627;
-        border-color: #443627;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: #d98324;
-    }
-
-    p,
-    .card-text {
-        color: #ffffff;
-    }
-
-    .btn-circle.btn-lg {
-        width: 40px;
-        height: 40px;
-        padding: 0;
-        font-size: 18px;
-        line-height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        background: none;
-        color: #ffffff;
-    }
-
-    .btn-circle.btn-lg:hover i {
-        color: #d98324;
-    }
-
-    .form-control {
-        height: 40px;
-        border-radius: 20px;
-        background-color: rgba(255, 255, 255, 0.2);
-        color: #ffffff;
-    }
-
-    .form-control::placeholder {
-        color: #ffffff;
-        opacity: 1;
-    }
-
-    .form-control:focus {
-        color: #000000;
-    }
-
-    .footer {
-        background-color: #443627;
-        color: white;
-        padding: 20px 0;
-    }
-
-    .footer a {
-        color: #d98324;
-    }
+        .footer a {
+            color: #d98324;
+        }
     </style>
 </head>
 

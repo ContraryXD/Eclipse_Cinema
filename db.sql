@@ -418,3 +418,21 @@ SET
         WHEN MovieID = 19 THEN 73000
         WHEN MovieID = 20 THEN 71000
     END;
+
+ALTER TABLE
+    Bookings
+MODIFY
+    BookingID INT AUTO_INCREMENT;
+
+CREATE TABLE Admins (
+    AdminID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(255),
+    Password VARCHAR(255)
+);
+
+INSERT INTO
+    Admins (Username, Password)
+VALUES
+    ('admin1', '123'),
+    ('admin2', '123'),
+    ('admin3', '123');

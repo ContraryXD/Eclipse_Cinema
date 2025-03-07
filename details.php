@@ -51,6 +51,27 @@ session_start();
         .movie-details p {
             color: #555555;
         }
+
+        .star-rating {
+            position: relative;
+            display: inline-block;
+            color: #ffd700;
+            width: 90px;
+        }
+
+        .star-rating .stars {
+            position: relative;
+            z-index: 1;
+        }
+
+        .star-rating .cover {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            background-color: #f2f6d0;
+            z-index: 2;
+        }
     </style>
 </head>
 
@@ -85,11 +106,21 @@ session_start();
             echo '        <p><strong>Diễn viên:</strong> ' . $row["Cast"] . '</p>';
             echo '        <p><strong>Ngày phát hành:</strong> ' . $row["ReleaseDate"] . '</p>';
             echo '        <p><strong>Mô tả:</strong> ' . $row["Description"] . '</p>';
+            echo '        <p><strong>Đánh giá:</strong>';
+            echo '            <div class="star-rating">';
+            echo '                <div class="stars">';
+            for ($i = 0; $i < 5; $i++) {
+                echo '<i class="fas fa-star"></i>';
+            }
+            echo '                </div>';
+            $cover_width = (10 - $row["Rating"]) * 10;
+            echo '                <div class="cover" style="width: ' . $cover_width . '%;"></div>';
+            echo '            </div></p>';
             echo '        <p><strong>Giá vé:</strong> ' . number_format($row["Price"], 0, ',', '.') . ' VND</p>';
             echo '        <a href="booking.php?movie_id=' . $row["MovieID"] . '" class="btn btn-primary">Đặt vé ngay</a>';
             echo '        <div class="mt-4">';
             echo '            <h4>Trailer</h4>';
-            echo '            <iframe width="560" height="315" src="https://www.youtube.com/embed/' . $row["TrailerURL"] . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            echo '            <iframe width="684" height="385" src="https://www.youtube.com/embed/' . $row["TrailerURL"] . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
             echo '        </div>';
             echo '    </div>';
             echo '</div>';

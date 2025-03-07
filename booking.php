@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// Check da dang nhap chua
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -40,12 +46,29 @@ session_start();
         }
 
         .rounded-color-div {
-            background-color: #d98324;
+            background-color: #EFDCAB;
             border-radius: 15px;
             padding: 20px;
             color: white;
             text-align: center;
             margin-top: 20px;
+        }
+
+        .details p {
+            color: black;
+        }
+
+        .payment input::placeholder {
+            color: rgb(133, 133, 133);
+        }
+
+        .payment input {
+            color: black;
+        }
+
+        .payment label {
+            font-size: +2;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -74,37 +97,66 @@ session_start();
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
+            $ticket_price = $row["Price"];
             echo '<div class="row">';
             echo '    <div class="col-md-4">';
             echo '        <img src="public/assets/movies/' . $row["Image"] . '" class="img-fluid" alt="' . $row["Title"] . '">';
             echo '    </div>';
-            echo '    <div class="col-md-8">';
+            echo '    <div class="col-md-8 details">';
             echo '        <h2>' . $row["Title"] . '</h2>';
             echo '        <p><strong>Thể loại:</strong> ' . $row["Genre"] . '</p>';
-            echo '        <p><strong>Giá vé:</strong> ' . number_format($row["Price"], 0, ',', '.') . ' VND</p>';
+            echo '        <p><strong>Giá vé:</strong> ' . number_format($ticket_price, 0, ',', '.') . ' VND</p>';
             echo '        <form action="process_booking.php" method="POST">';
             echo '            <input type="hidden" name="movie_id" value="' . $row["MovieID"] . '">';
             echo '            <div class="mb-3">';
-            echo '                <label for="cinema" class="form-label">Chọn rạp</label>';
-            echo '                <select class="form-control" id="cinema" name="cinema" required>';
-            echo '                    <option value="">Chọn rạp</option>';
+            echo '                <label for="showtime_id" class="form-label fw-bold">Chọn suất chiếu</label>';
+            echo '                <select class="form-control text-dark" id="showtime_id" name="showtime_id" required>';
+            echo '                    <option value="">Chọn suất chiếu</option>';
 
-            // Fetch cinemas
-            $cinema_sql = "SELECT * FROM Theaters";
-            $cinema_result = $conn->query($cinema_sql);
-            if ($cinema_result->num_rows > 0) {
-                while ($cinema_row = $cinema_result->fetch_assoc()) {
-                    echo '<option value="' . $cinema_row["TheaterID"] . '">' . $cinema_row["Name"] . ' - ' . $cinema_row["Location"] . '</option>';
+            // xuất chiếu phim
+            $showtime_sql = "SELECT Showtimes.ShowtimeID, Showtimes.ShowDateTime, Theaters.Name AS TheaterName FROM Showtimes JOIN Theaters ON Showtimes.TheaterID = Theaters.TheaterID WHERE Showtimes.MovieID = $movie_id";
+            $showtime_result = $conn->query($showtime_sql);
+            if ($showtime_result->num_rows > 0) {
+                while ($showtime_row = $showtime_result->fetch_assoc()) {
+                    echo '<option value="' . $showtime_row["ShowtimeID"] . '" data-theater="' . $showtime_row["TheaterName"] . '">' . $showtime_row["ShowDateTime"] . ' - ' . $showtime_row["TheaterName"] . '</option>';
                 }
             }
 
             echo '                </select>';
             echo '            </div>';
+            echo '            <div id="theater-info" class="mb-3"></div>';
             echo '            <div class="mb-3">';
-            echo '                <label for="seats" class="form-label">Số lượng vé</label>';
-            echo '                <input type="number" class="form-control" id="seats" name="seats" min="1" max="10" required>';
+            echo '                <label for="seats" class="form-label fw-bold">Số lượng vé</label>';
+            echo '                <input type="number" class="form-control text-dark" id="seats" name="seats" min="1" max="10" style="width: 100px;" required>';
+            echo '            </div>';
+            echo '            <div class="mb-3">';
+            echo '                <label for="total_price" class="form-label fw-bold">Tổng tiền</label>';
+            echo '                <input type="text" class="form-control text-dark" id="total_price" name="total_price" readonly>';
+            echo '            </div>';
+            echo '            <div class="mb-3">';
+            echo '                <label for="discount" class="form-label fw-bold">Giảm giá</label>';
+            echo '                <input type="text" class="form-control text-dark" id="discount" name="discount" readonly>';
+            echo '            </div>';
+            echo '        <h3 class="mt-5">Thông tin thanh toán</h3>';
+            echo '        <div class="payment">';
+            echo '            <div class="mb-3">';
+            echo '                <label for="card_number" class="form-label">Số thẻ</label>';
+            echo '                <input type="text" class="form-control" id="card_number" name="card_number" required>';
+            echo '            </div>';
+            echo '            <div class="mb-3">';
+            echo '                <label for="card_name" class="form-label">Tên trên thẻ</label>';
+            echo '                <input type="text" class="form-control" id="card_name" name="card_name" required>';
+            echo '            </div>';
+            echo '            <div class="mb-3">';
+            echo '                <label for="expiry_date" class="form-label">Ngày hết hạn</label>';
+            echo '                <input type="text" class="form-control" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>';
+            echo '            </div>';
+            echo '            <div class="mb-3">';
+            echo '                <label for="cvv" class="form-label">CVV</label>';
+            echo '                <input type="text" class="form-control" id="cvv" name="cvv" required>';
             echo '            </div>';
             echo '            <button type="submit" class="btn btn-primary">Đặt vé ngay</button>';
+            echo '      </div>';
             echo '        </form>';
             echo '    </div>';
             echo '</div>';
@@ -114,13 +166,26 @@ session_start();
 
         $conn->close();
         ?>
-        <div class="rounded-color-div">
-            <p>Enjoy your movie experience at Eclipse Cinema!</p>
-        </div>
     </div>
     <?php include 'template/footer.html'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="public/js/main.js"></script>
+    <script>
+        document.getElementById('showtime_id').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var theaterInfo = selectedOption.getAttribute('data-theater');
+            document.getElementById('theater-info').innerText = theaterInfo ? 'Rạp: ' + theaterInfo : '';
+        });
+
+        document.getElementById('seats').addEventListener('input', function() {
+            var seats = parseInt(this.value);
+            var ticketPrice = <?php echo $ticket_price; ?>;
+            var discount = seats > 1 ? (seats - 1) * 0.02 : 0;
+            var totalPrice = seats * ticketPrice * (1 - discount);
+            document.getElementById('total_price').value = totalPrice.toLocaleString('vi-VN') + ' VND';
+            document.getElementById('discount').value = (discount * 100).toFixed(2) + '%';
+        });
+    </script>
 </body>
 
 </html>
