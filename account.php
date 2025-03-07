@@ -20,92 +20,85 @@ $user_id = $_SESSION['id']; // Get user ID from session
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="./public/css/style.css" rel="stylesheet">
     <style>
-        .hero {
-            position: relative;
-            background: url("./public/assets/poster_2.jpg") no-repeat center center;
-            background-size: cover;
-            height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #d98324;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
+    .hero {
+        position: relative;
+        background: url("./public/assets/poster_2.jpg") no-repeat center center;
+        background-size: cover;
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #d98324;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
 
-        body {
-            background-color: #f2f6d0;
-            position: relative;
-        }
+    body {
+        background-color: #f2f6d0;
+        position: relative;
+    }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
 
-        .content {
-            position: relative;
-            z-index: 2;
-        }
+    .content {
+        position: relative;
+        z-index: 2;
+    }
 
-        .login-container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            margin: auto;
-        }
+    .login-container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        margin: auto;
+    }
 
-        .login-container h2 {
-            color: #d98324;
-            margin-bottom: 20px;
-        }
+    .login-container h2 {
+        color: #d98324;
+        margin-bottom: 20px;
+    }
 
-        .btn-primary {
-            background-color: #d98324;
-            border-color: #d98324;
-        }
+    .btn-primary {
+        background-color: #d98324;
+        border-color: #d98324;
+    }
 
-        .btn-primary:hover {
-            background-color: #443627;
-            border-color: #443627;
-        }
+    .btn-primary:hover {
+        background-color: #443627;
+        border-color: #443627;
+    }
 
-        .login input {
-            color: black;
-        }
+    .login input {
+        color: black;
+    }
 
-        .table-container {
-            margin-top: 30px;
-        }
+    .table-container {
+        margin-top: 30px;
+    }
 
-        .table th,
-        .table td {
-            vertical-align: middle;
-        }
+    .table th,
+    .table td {
+        vertical-align: middle;
+    }
 
-        .details p {
-            color: black;
-            font-size: 19px;
-        }
+    .details p {
+        color: black;
+        font-size: 19px;
+    }
     </style>
 </head>
 
 <body>
     <?php include 'template/nav.php'; ?>
-    <div class="hero">
-        <div class="overlay"></div>
-        <div class="content text-center">
-            <h1>Eclipse Cinema</h1>
-            <p class="fs-2">Tài khoản</p>
-        </div>
-    </div>
     <?php
     // Assuming you have a database connection file
     include 'connection.php';
@@ -133,6 +126,13 @@ $user_id = $_SESSION['id']; // Get user ID from session
     $booking_result = mysqli_query($conn, $booking_query);
     $bookings = mysqli_fetch_all($booking_result, MYSQLI_ASSOC);
     ?>
+    <div class="hero">
+        <div class="overlay"></div>
+        <div class="content text-center">
+            <h1>Eclipse Cinema</h1>
+            <p class="fs-2">Xin chào <?php echo $user['UserName']  ?></p>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-12 details d-flex justify-content-between align-items-center">
@@ -163,15 +163,15 @@ $user_id = $_SESSION['id']; // Get user ID from session
                     </thead>
                     <tbody>
                         <?php for ($i = 0; $i < count($bookings); $i++) { ?>
-                            <tr>
-                                <td><?php echo $bookings[$i]['BookingID']; ?></td>
-                                <td><?php echo $bookings[$i]['MovieTitle']; ?></td>
-                                <td><?php echo $bookings[$i]['MovieGenre']; ?></td>
-                                <td><?php echo $bookings[$i]['MovieReleaseDate']; ?></td>
-                                <td><?php echo $bookings[$i]['TheaterName']; ?></td>
-                                <td><?php echo $bookings[$i]['TheaterLocation']; ?></td>
-                                <td><?php echo $bookings[$i]['ShowDateTime']; ?></td>
-                            </tr>
+                        <tr>
+                            <td><?php echo $bookings[$i]['BookingID']; ?></td>
+                            <td><?php echo $bookings[$i]['MovieTitle']; ?></td>
+                            <td><?php echo $bookings[$i]['MovieGenre']; ?></td>
+                            <td><?php echo $bookings[$i]['MovieReleaseDate']; ?></td>
+                            <td><?php echo $bookings[$i]['TheaterName']; ?></td>
+                            <td><?php echo $bookings[$i]['TheaterLocation']; ?></td>
+                            <td><?php echo $bookings[$i]['ShowDateTime']; ?></td>
+                        </tr>
                         <?php } ?>
                     </tbody>
                 </table>

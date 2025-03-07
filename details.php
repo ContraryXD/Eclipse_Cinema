@@ -67,7 +67,8 @@ session_start();
     $sql = "SELECT * FROM Movies WHERE MovieID = $movie_id";
     $result = $conn->query($sql);
     ?>
-    <div class="hero" style="background: url('./public/assets/movies/movie_<?php echo $movie_id; ?>_1.jpg') no-repeat center center; background-size: cover;">
+    <div class="hero"
+        style="background: url('./public/assets/movies/movie_<?php echo $movie_id; ?>_1.jpg') no-repeat center center; background-size: cover;">
     </div>
     <div class="container mt-5 movie-details">
         <?php
@@ -75,15 +76,16 @@ session_start();
             // Xuất dữ liệu của phim
             $row = $result->fetch_assoc();
             echo '<div class="row">';
-            echo '    <div class="col-md-4">';
+            echo '    <div class="col-md-5">';
             echo '        <img src="public/assets/movies/' . $row["Image"] . '" class="img-fluid" alt="' . $row["Title"] . '">';
             echo '    </div>';
-            echo '    <div class="col-md-8">';
+            echo '    <div class="col-md-5">';
             echo '        <h2>' . $row["Title"] . '</h2>';
             echo '        <p><strong>Thể loại:</strong> ' . $row["Genre"] . '</p>';
             echo '        <p><strong>Diễn viên:</strong> ' . $row["Cast"] . '</p>';
             echo '        <p><strong>Ngày phát hành:</strong> ' . $row["ReleaseDate"] . '</p>';
             echo '        <p><strong>Mô tả:</strong> ' . $row["Description"] . '</p>';
+            echo '        <p><strong>Giá vé:</strong> ' . number_format($row["Price"], 0, ',', '.') . ' VND</p>';
             echo '        <a href="booking.php?movie_id=' . $row["MovieID"] . '" class="btn btn-primary">Đặt vé ngay</a>';
             echo '        <div class="mt-4">';
             echo '            <h4>Trailer</h4>';
@@ -92,7 +94,7 @@ session_start();
             echo '    </div>';
             echo '</div>';
         } else {
-            echo "<p>Không tìm thấy phim.</p>";
+            echo "<p class='text-center'>Không tìm thấy phim.</p>";
         }
 
         $conn->close();

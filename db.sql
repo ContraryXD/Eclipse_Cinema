@@ -226,7 +226,7 @@ VALUES
     ),
     (
         14,
-        'Mission: Impossible – Dead Reckoning Part Two',
+        'Mission: Impossible - Dead Reckoning Part Two',
         'Action',
         '2025-08-22',
         145,
@@ -234,7 +234,7 @@ VALUES
         'movie_14.jpg',
         'm_NgfNn5wNk',
         'Tom Cruise, Rebecca Ferguson, Simon Pegg',
-        'Phần hai của bộ phim hành động "Mission: Impossible – Dead Reckoning".'
+        'Phần hai của bộ phim hành động "Mission: Impossible - Dead Reckoning".'
     ),
     (
         15,
@@ -387,3 +387,34 @@ VALUES
         'emily@example.com',
         '123'
     );
+
+ALTER TABLE
+    Movies
+ADD
+    COLUMN Price INT;
+
+UPDATE
+    Movies
+SET
+    Price = CASE
+        WHEN MovieID = 1 THEN 70000
+        WHEN MovieID = 2 THEN 60000
+        WHEN MovieID = 3 THEN 45000
+        WHEN MovieID = 4 THEN 80000
+        WHEN MovieID = 5 THEN 40000
+        WHEN MovieID = 6 THEN 78000
+        WHEN MovieID = 7 THEN 52000
+        WHEN MovieID = 8 THEN 47000
+        WHEN MovieID = 9 THEN 68000
+        WHEN MovieID = 10 THEN 75000
+        WHEN MovieID = 11 THEN 62000
+        WHEN MovieID = 12 THEN 76000
+        WHEN MovieID = 13 THEN 58000
+        WHEN MovieID = 14 THEN 77000
+        WHEN MovieID = 15 THEN 44000
+        WHEN MovieID = 16 THEN 80000
+        WHEN MovieID = 17 THEN 78000
+        WHEN MovieID = 18 THEN 69000
+        WHEN MovieID = 19 THEN 73000
+        WHEN MovieID = 20 THEN 71000
+    END;
