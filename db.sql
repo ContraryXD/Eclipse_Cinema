@@ -196,7 +196,7 @@ VALUES
         149,
         8.3,
         'movie_11.jpg',
-        'dMpgF8IoFqY',
+        'u3V5KDHRQvk',
         'Chris Pratt, Zoe Saldana, Dave Bautista',
         'Phần ba của loạt phim siêu anh hùng "Guardians of the Galaxy".'
     ),
@@ -208,7 +208,7 @@ VALUES
         160,
         8.7,
         'movie_12.jpg',
-        'QhEV6txeWXk',
+        'wsf78BS9VE0',
         'Robert Pattinson, Zoë Kravitz, Colin Farrell',
         'Một phần mới trong loạt phim "The Batman", tập trung vào cuộc đối đầu với thế lực tội phạm trong Arkham.'
     ),
@@ -220,7 +220,7 @@ VALUES
         142,
         7.9,
         'movie_13.jpg',
-        'xR9DjxXntRc',
+        'by_gr6oC9Fg',
         'Eddie Redmayne, Katherine Waterston, Jude Law',
         'Phần tiếp theo của loạt phim "Fantastic Beasts", với cuộc phiêu lưu mới.'
     ),
@@ -232,7 +232,7 @@ VALUES
         145,
         8.5,
         'movie_14.jpg',
-        'm_NgfNn5wNk',
+        'NOhDyUmT9z0',
         'Tom Cruise, Rebecca Ferguson, Simon Pegg',
         'Phần hai của bộ phim hành động "Mission: Impossible - Dead Reckoning".'
     ),
@@ -244,7 +244,7 @@ VALUES
         116,
         7.1,
         'movie_15.jpg',
-        '3uBZB00XYwk',
+        'dG91B3hHyY4',
         'Jason Statham, Li Bingbing, Ruby Rose',
         'Phần hai của bộ phim khoa học viễn tưởng "The Meg".'
     ),
@@ -256,7 +256,7 @@ VALUES
         190,
         8.9,
         'movie_16.jpg',
-        'FajM0D9rthY',
+        'a8Gx8wiNbs8',
         'Sam Worthington, Zoe Saldana, Sigourney Weaver',
         'Phần tiếp theo của bộ phim "Avatar", tiếp tục câu chuyện về Pandora.'
     ),
@@ -268,7 +268,7 @@ VALUES
         130,
         8.8,
         'movie_17.jpg',
-        'D61ifKo42k0',
+        '_OKAwz2MsJs',
         'Joaquin Phoenix, Lady Gaga, Zazie Beetz',
         'Phần tiếp theo của bộ phim "Joker", khám phá thêm về sự điên rồ của nhân vật chính.'
     ),
@@ -280,7 +280,7 @@ VALUES
         120,
         8.9,
         'movie_18.jpg',
-        'PqmiEy0vCdo',
+        'D7pQ-S8QlC8',
         'Shameik Moore, Hailee Steinfeld, Mahershala Ali',
         'Phần tiếp theo của bộ phim hoạt hình "Spider-Man: Into the Spider-Verse".'
     ),
@@ -292,7 +292,7 @@ VALUES
         150,
         8.6,
         'movie_19.jpg',
-        'vtoShbSlJ4g',
+        '_Z3QKkl1WyM',
         'Letitia Wright, Winston Duke, Angela Bassett',
         'Phần tiếp theo của bộ phim siêu anh hùng "Black Panther".'
     ),
@@ -304,7 +304,7 @@ VALUES
         135,
         8.7,
         'movie_20.jpg',
-        'KjUcfHkHdYg',
+        'zv3NDaFqjIc',
         'Keanu Reeves, Laurence Fishburne, Ian McShane',
         'Phần tiếp theo của loạt phim hành động "John Wick".'
     );
@@ -342,7 +342,17 @@ VALUES
     (7, 7, 2, '2025-04-16 19:30:00'),
     (8, 8, 3, '2025-04-17 20:30:00'),
     (9, 9, 1, '2025-04-18 18:45:00'),
-    (10, 10, 2, '2025-04-19 17:15:00');
+    (10, 10, 2, '2025-04-19 17:15:00'),
+    (11, 11, 3, '2025-04-20 19:00:00'),
+    (12, 12, 1, '2025-04-21 20:00:00'),
+    (13, 13, 2, '2025-04-22 18:30:00'),
+    (14, 14, 3, '2025-04-23 19:45:00'),
+    (15, 15, 1, '2025-04-24 21:00:00'),
+    (16, 16, 2, '2025-04-25 20:15:00'),
+    (17, 17, 3, '2025-04-26 18:45:00'),
+    (18, 18, 1, '2025-04-27 19:30:00'),
+    (19, 19, 2, '2025-04-28 20:00:00'),
+    (20, 20, 3, '2025-04-29 21:15:00');
 
 -- Insert sample bookings
 INSERT INTO
@@ -436,3 +446,8 @@ VALUES
     ('admin1', '123'),
     ('admin2', '123'),
     ('admin3', '123');
+
+ALTER TABLE
+    Users
+MODIFY
+    UserID INT AUTO_INCREMENT;

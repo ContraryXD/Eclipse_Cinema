@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_showtime'])) {
 }
 
 // Lấy danh sách suất chiếu từ cơ sở dữ liệu
-$sql = "SELECT Showtimes.ShowtimeID, Movies.Title, Showtimes.ShowDateTime 
+$sql = "SELECT Showtimes.ShowtimeID, Showtimes.MovieID, Movies.Title, Showtimes.ShowDateTime 
         FROM Showtimes 
         JOIN Movies ON Showtimes.MovieID = Movies.MovieID";
 $result = $conn->query($sql);
@@ -86,7 +86,8 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý suất chiếu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
 
@@ -98,7 +99,8 @@ $result = $conn->query($sql);
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
                 <h1 class="text-center">Quản lý suất chiếu</h1>
                 <div class="d-flex justify-content-end mb-3">
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newShowtimeModal">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#newShowtimeModal">
                         <i class="bi bi-plus-circle"></i> Thêm suất chiếu mới
                     </button>
                 </div>
@@ -136,7 +138,8 @@ $result = $conn->query($sql);
     </div>
 
     <!-- Modal thêm suất chiếu mới -->
-    <div class="modal fade" id="newShowtimeModal" tabindex="-1" aria-labelledby="newShowtimeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="newShowtimeModal" tabindex="-1" aria-labelledby="newShowtimeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -163,7 +166,8 @@ $result = $conn->query($sql);
                         </div>
                         <div class="mb-3">
                             <label for="show_date_time" class="form-label">Thời gian chiếu</label>
-                            <input type="datetime-local" class="form-control" id="show_date_time" name="show_date_time" required>
+                            <input type="datetime-local" class="form-control" id="show_date_time" name="show_date_time"
+                                required>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu suất chiếu</button>
                     </form>
@@ -173,7 +177,8 @@ $result = $conn->query($sql);
     </div>
 
     <!-- Modal chỉnh sửa suất chiếu -->
-    <div class="modal fade" id="editShowtimeModal" tabindex="-1" aria-labelledby="editShowtimeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editShowtimeModal" tabindex="-1" aria-labelledby="editShowtimeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -201,7 +206,8 @@ $result = $conn->query($sql);
                         </div>
                         <div class="mb-3">
                             <label for="edit_show_date_time" class="form-label">Thời gian chiếu</label>
-                            <input type="datetime-local" class="form-control" id="edit_show_date_time" name="show_date_time" required>
+                            <input type="datetime-local" class="form-control" id="edit_show_date_time"
+                                name="show_date_time" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                     </form>
@@ -211,7 +217,8 @@ $result = $conn->query($sql);
     </div>
 
     <!-- Modal xóa suất chiếu -->
-    <div class="modal fade" id="deleteShowtimeModal" tabindex="-1" aria-labelledby="deleteShowtimeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteShowtimeModal" tabindex="-1" aria-labelledby="deleteShowtimeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
