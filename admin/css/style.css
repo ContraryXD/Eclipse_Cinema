@@ -1,0 +1,66 @@
+body {
+  background-color: #fff2f2;
+}
+
+.navbar {
+  background-color: #a9b5df;
+  z-index: 1020; /* Ensure the navbar is above other elements */
+}
+
+.sidebar {
+  height: 100vh;
+  background-color: #a9b5df;
+  padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1030; /* Ensure the sidebar is below the navbar */
+}
+
+.sidebar a {
+  font-weight: bold;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #7886c7;
+  color: #2d336b;
+}
+
+.sidebar .nav-links a:first-child {
+  background-color: transparent;
+  color: #2d336b;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+.sidebar .nav-links a:first-child:hover {
+  background-color: transparent;
+  color: #2d336b;
+  text-decoration: none;
+}
+
+.content {
+  margin-left: 200px; /* Adjust based on sidebar width */
+  padding: 20px;
+  padding-top: 70px; /* Adjust based on navbar height */
+}
+
+.sidebar .nav-links {
+  flex-grow: 1;
+}
+
+.logout-btn {
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #2d336b;
+  color: #fff2f2;
+  border: none;
+}

@@ -15,26 +15,21 @@ if (!isset($_SESSION['admin_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Admin Dashboard</h1>
-        <div class="row mt-4">
-            <div class="col-md-3">
-                <a href="orders.php" class="btn btn-primary w-100 mb-3">Orders</a>
-            </div>
-            <div class="col-md-3">
-                <a href="movies.php" class="btn btn-primary w-100 mb-3">Movies</a>
-            </div>
-            <div class="col-md-3">
-                <a href="users.php" class="btn btn-primary w-100 mb-3">Users</a>
-            </div>
-            <div class="col-md-3">
-                <a href="logout.php" class="btn btn-danger w-100 mb-3">Logout</a>
-            </div>
+    <?php include 'top.html'; ?>
+    <div class="container-fluid pt-5">
+        <div class="row">
+            <?php include 'side.html'; ?>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+                <h1 class="text-center">Trang chủ Administrator</h1>
+            </main>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
