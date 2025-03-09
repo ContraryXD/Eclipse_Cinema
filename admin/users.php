@@ -13,7 +13,7 @@ include '../connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_user'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = $_POST['password'];
 
     // Thêm mới người dùng vào cơ sở dữ liệu
     $sql = "INSERT INTO Users (UserName, Email, Password) VALUES (?, ?, ?)";
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_user'])) {
     $user_id = $_POST['user_id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = $_POST['password'];
 
     // Cập nhật người dùng trong cơ sở dữ liệu
     $sql = "UPDATE Users SET UserName = ?, Email = ?, Password = ? WHERE UserID = ?";
@@ -157,7 +157,10 @@ $result = $conn->query($sql);
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" name="password" required>
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword"><i class="bi bi-eye-slash"></i></button>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu người dùng</button>
                     </form>
@@ -188,7 +191,10 @@ $result = $conn->query($sql);
                         </div>
                         <div class="mb-3">
                             <label for="edit_password" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" id="edit_password" name="password" required>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="edit_password" name="password" required>
+                                <button class="btn btn-outline-secondary" type="button" id="toggleEditPassword"><i class="bi bi-eye-slash"></i></button>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                     </form>
@@ -248,6 +254,31 @@ $result = $conn->query($sql);
 
             var deleteUserIdInput = deleteUserModal.querySelector('#delete_user_id');
             deleteUserIdInput.value = userId;
+        });
+
+        // Toggle password visibility
+        var togglePassword = document.getElementById('togglePassword');
+        var password = document.getElementById('password');
+        togglePassword.addEventListener('click', function() {
+            if (password.type === 'password') {
+                password.type = 'text';
+                togglePassword.innerHTML = '<i class="bi bi-eye"></i>';
+            } else {
+                password.type = 'password';
+                togglePassword.innerHTML = '<i class="bi bi-eye-slash"></i>';
+            }
+        });
+
+        var toggleEditPassword = document.getElementById('toggleEditPassword');
+        var editPassword = document.getElementById('edit_password');
+        toggleEditPassword.addEventListener('click', function() {
+            if (editPassword.type === 'password') {
+                editPassword.type = 'text';
+                toggleEditPassword.innerHTML = '<i class="bi bi-eye"></i>';
+            } else {
+                editPassword.type = 'password';
+                toggleEditPassword.innerHTML = '<i class="bi bi-eye-slash"> </i>';
+            }
         });
     </script>
 </body>
